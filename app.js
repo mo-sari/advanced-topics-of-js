@@ -20,13 +20,17 @@ class Triangle {
 }
 
 class RightTriangle extends Triangle {
+  constructor(a, b, color) {
+    super(a, b);
+    this.color = color;
+  }
   describe() {
     return "this is not available in Triangle only in this class";
   }
+  hello() {
+    return super.hello() + ` from the child(RightTriangle class)`;
+  }
 }
 
-const newTri = new RightTriangle();
-console.log(newTri);
-console.log(newTri instanceof Triangle);
-const anotherTri = new RightTriangle(3, 4);
-console.log(anotherTri.getArea());
+const newTri = new RightTriangle(3, 2, "blue");
+console.log(newTri.hello());
