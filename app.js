@@ -1,13 +1,17 @@
 class Circle {
   #radius;
+  #privateMethod() {
+    console.log("this is private");
+  }
   constructor(r) {
     this.#radius = r;
   }
   get radius() {
+    this.#privateMethod();
     return this.#radius;
   }
 }
 
 const c = new Circle(10);
-console.log(c.radius);
-// console.lsog(c.#radius);
+// c.#privateMethod();
+c.radius;
