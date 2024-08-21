@@ -13,24 +13,9 @@ class Triangle {
   getHypotenuse() {
     return this.a ** 2 + this.b ** 2;
   }
-
-  hello() {
-    return `a triangle with ${this.getArea()} area size says hello`;
-  }
+  static sideNumber = 3;
 }
 
-class RightTriangle extends Triangle {
-  constructor(a, b, color) {
-    super(a, b);
-    this.color = color;
-  }
-  describe() {
-    return "this is not available in Triangle only in this class";
-  }
-  hello() {
-    return super.hello() + ` from the child(RightTriangle class)`;
-  }
-}
-
-const newTri = new RightTriangle(3, 2, "blue");
-console.log(newTri.hello());
+const tri = new Triangle(2, 4);
+console.log(tri.sideNumber);
+console.log(Triangle.sideNumber);
