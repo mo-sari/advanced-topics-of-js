@@ -13,9 +13,9 @@ class Triangle {
   }
 }
 
-const tri = new Triangle(2, 4);
-console.log(tri.sideNumber);
-console.log(Triangle.sideNumber);
-console.log(Triangle.func());
-// this in a static method refers to the class itself
-// but in a regular method refers to the instance.
+// why would we use static function's ? :
+//  we can combine related functionalities like
+// what we had in react-django project's for
+// login, logout and ... something like:
+// API.login, API.logout ==> API in this case is the class
+// that has login, logout and some other static method's.
