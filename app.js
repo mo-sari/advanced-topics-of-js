@@ -9,6 +9,7 @@ console.log(newPet["name"]);
 
 const key = "species";
 console.log(newPet.key);
+// above looks for the exact key keyword, below evaluates it to a string first.
 console.log(newPet[key]);
 // not existing variable evaluate to undefined
 // all key's get stringified
@@ -23,7 +24,7 @@ let tri = {
   a: 3,
   b: 4,
   getArea: function () {
-    return (a * b) / 2;
+    return (this.a * this.b) / 2;
   },
 };
 
