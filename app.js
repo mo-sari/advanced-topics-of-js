@@ -1,21 +1,17 @@
 class Triangle {
   constructor(a, b) {
-    this.a = a;
-    this.b = b;
+    this._a = a;
+    this._b = b;
+    // _, indicating that do not mess with this directly
   }
-
-  static sideNumber = 3;
-  static func() {
-    console.log(this);
+  //   getter syntax in js
+  get area() {
+    return (this._a * this._b) / 2;
   }
-  newFunc() {
-    console.log(this);
+  get a() {
+    return this._a;
   }
 }
 
-// why would we use static function's ? :
-//  we can combine related functionalities like
-// what we had in react-django project's for
-// login, logout and ... something like:
-// API.login, API.logout ==> API in this case is the class
-// that has login, logout and some other static method's.
+const tri = new Triangle(3, 4);
+console.log(tri.area);
