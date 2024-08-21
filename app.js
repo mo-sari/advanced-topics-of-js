@@ -19,5 +19,14 @@ class Triangle {
   }
 }
 
-const triA = new Triangle(3, 4);
-console.log(triA.hello());
+class RightTriangle extends Triangle {
+  describe() {
+    return "this is not available in Triangle only in this class";
+  }
+}
+
+const newTri = new RightTriangle();
+console.log(newTri);
+console.log(newTri instanceof Triangle);
+const anotherTri = new RightTriangle(3, 4);
+console.log(anotherTri.getArea());
