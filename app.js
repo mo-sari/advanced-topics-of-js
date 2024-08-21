@@ -1,4 +1,12 @@
 class Triangle {
+  constructor(a, b) {
+    if (a <= 0 || b <= 0) {
+      throw new Error("you canttt");
+    }
+    this.a = a;
+    this.b = b;
+  }
+  //   constructor method's are called upon instance creation.
   getArea() {
     return (this.a * this.b) / 2;
   }
@@ -7,18 +15,13 @@ class Triangle {
     return this.a ** 2 + this.b ** 2;
   }
 }
-// this keyword points to the instance not the Triangle class
 
-const triA = new Triangle();
-const triB = new Triangle();
-
-console.log(typeof triA);
-triA.a = 2;
-triA.b = 3;
-
+const triA = new Triangle(3, 4);
+console.log(triA);
 console.log(triA.getArea());
-// we used class format which still outputs an object, but we can share the functionaltites
-// among as many objects as we want.
 
-console.log(triA instanceof Triangle);
-console.log(typeof triA);
+// usual usecases of constructors:
+// 1- assign properties
+// 2- validation
+
+console.log(new Triangle(0, 1));
