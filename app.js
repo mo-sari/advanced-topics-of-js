@@ -1,17 +1,29 @@
-const conan = {
-  name: "conan",
-  sing: function () {
-    console.log(this);
-  },
-};
+class Counter {
+  constructor(startNum = 0, increment = 1) {
+    this.count = startNum;
+    this.increment = increment;
+  }
 
-const btn = document.getElementById("btn");
-// btn.addEventListener("click", function () {
-//   console.log("clicked here");
-// });
-// btn.addEventListener("click", conan.sing);
-btn.addEventListener("click", conan.sing.bind(conan));
+  // start() {
+  //   setInterval(function () {
+  //     console.log(this);
+  //     console.log(this.count);
+  //     this.count += this.increment;
+  //   }, 1000);
+  // }
+  // we're using setInterval function that is like we're saying window.setInterval
+  // so this keyword's owner is window
+  start() {
+    setInterval(
+      function () {
+        console.log(this);
+        console.log(this.count);
+        this.count += this.increment;
+      }.bind(this),
+      1000
+    );
+  }
+}
 
-// when mostly this bind keyword comes up ?
-// when you do not directly call functions and instead JavaScript calls them,
-// a keyword this is created for you.
+const counter = new Counter();
+counter.start();
