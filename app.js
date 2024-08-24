@@ -1,36 +1,16 @@
-class Cat {
-  constructor(firstName) {
-    this.firstName = firstName;
-  }
-  static getRandomCat() {
-    console.log(this);
-  }
-
-  dance(style = "tango") {
-    return `Meow, I am ${this.firstName} and I like to ${style}`;
-  }
-}
-
-// sometimes you'll need to say "call this function on this object",
-// that's what call() is for!
-const fluffy = new Cat("fluffy");
-
-let fDance = fluffy.dance;
-const newCat = new Cat("gholi");
-
-console.log(fDance.call(newCat));
-// we can even provide arguments
-console.log(fDance.call(fluffy, "tango"));
-
-const hasan = {
-  name: "hasan",
-  sing: function () {
-    return `${this.name} sings`;
+const ringo = {
+  firstName: "ringo",
+  greet: function (greeting, punctuation) {
+    console.log(`${this.firstName} says ${greeting}${punctuation}`);
   },
 };
-const lisa = {
-  name: "lisa",
+
+const george = {
+  firstName: "George",
 };
 
-console.log(hasan.sing());
-console.log(hasan.sing.call(lisa));
+console.log(ringo.greet("hello", "!!!"));
+console.log(ringo.greet.call(george, "hello", "!!"));
+
+console.log(ringo.greet.apply(george, ["hello", "!!!!"]));
+// the difference is just how we pass the arguments
