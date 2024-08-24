@@ -1,16 +1,34 @@
-// the new keyword does four things:
-// 1 creates an empty object
-// 2 stes the keyword this to be that object
-// 3 returns the object - return this
-// 4 creates a link to the object's prototype
-
 function Dog(name, breed) {
-  console.log(this);
   this.name = name;
   this.breed = breed;
+  this.bark = function () {
+    return `${this.name} says woof!`;
+  };
 }
-// this is a factory that describes the shape of an object
-// it's uppercase to notify everyone that this is not a regular
-// function and it's an object factory.
-console.log(Dog("name", "breed"));
-console.log(new Dog("newName", "newBreed"));
+
+const dog1 = new Dog("dog", "breed");
+const dog2 = new Dog("dog2", "breed2");
+
+console.log(dog1, dog2);
+// THEY both have their own copy of bark method,
+// if you create a thousand of them, you'll have a thousand
+// numbers of bark method.
+
+console.log(dog1.bark === dog2.bark);
+
+class NewDog {
+  constructor(name, breed) {
+    this.name = name;
+    this.breed = breed;
+  }
+
+  bark() {
+    return `${this.name} says woof!`;
+  }
+}
+const dog3 = new NewDog("dog", "breed");
+const dog4 = new NewDog("dog2", "breed2");
+
+console.log(dog3, dog4);
+// the bark method is shared through prototypes.
+console.log(dog3.bark === dog4.bark);
