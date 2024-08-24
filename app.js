@@ -1,11 +1,30 @@
 function greet() {
-  return "hello";
+  return `${this} says hello`;
 }
 
 console.log(greet());
-window.console.log(greet());
+// calling greet this way is like calling ==> window.greet()
+// the this keywrod's owner is on the left side (window itself)
 
-// when you call a function on nothing, you call it on the "global object"
-// in browser JS, that's typically window( the browser window);
-// this is important because the keyword this, dependes on the object
-// the function is called on.
+const obj = {
+  name: "ali",
+  greet: greet,
+};
+
+console.log(obj.greet());
+// now the owner on the left side is changed.
+
+const person = {
+  name: "ali",
+  sing: function () {
+    return `${this.name} sings LALALA`;
+  },
+};
+
+// this is why the output of these two lines differ
+console.log(person.sing());
+
+const singsss = person.sing;
+console.log(singsss());
+
+// the second one is called on window like, window.singsss()
