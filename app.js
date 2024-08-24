@@ -1,13 +1,17 @@
-function applyTax(taxRate, price) {
-  return price + price * taxRate;
-}
+const conan = {
+  name: "conan",
+  sing: function () {
+    console.log(this);
+  },
+};
 
-console.log(applyTax(2, 3));
-console.log(applyTax.call(null, 2, 3));
+const btn = document.getElementById("btn");
+// btn.addEventListener("click", function () {
+//   console.log("clicked here");
+// });
+// btn.addEventListener("click", conan.sing);
+btn.addEventListener("click", conan.sing.bind(conan));
 
-// a common usecase of bind method is to bake in an argument to an already
-// existing function
-
-const qomTax = applyTax.bind(null, 2);
-console.log(qomTax(3));
-// bind returns a new copy of the function that is bound to
+// when mostly this bind keyword comes up ?
+// when you do not directly call functions and instead JavaScript calls them,
+// a keyword this is created for you.
