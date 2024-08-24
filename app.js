@@ -1,29 +1,23 @@
-class Counter {
-  constructor(startNum = 0, increment = 1) {
-    this.count = startNum;
-    this.increment = increment;
+class Cat {
+  constructor(firstName) {
+    this.firstName = firstName;
   }
 
-  // start() {
-  //   setInterval(function () {
-  //     console.log(this);
-  //     console.log(this.count);
-  //     this.count += this.increment;
-  //   }, 1000);
-  // }
-  // we're using setInterval function that is like we're saying window.setInterval
-  // so this keyword's owner is window
-  start() {
-    setInterval(
-      function () {
-        console.log(this);
-        console.log(this.count);
-        this.count += this.increment;
-      }.bind(this),
-      1000
-    );
+  superGreet() {
+    console.log(`1: I am ${this.firstName}`);
+
+    setTimeout(function () {
+      console.log(`this is: `, this);
+      console.log(`2: I am ${this.firstName}`);
+    });
+
+    setTimeout(() => {
+      console.log("this is: ", this);
+      console.log(`3 I am ${this.firstName}`);
+    });
   }
 }
 
-const counter = new Counter();
-counter.start();
+let kitty = new Cat("kitty");
+kitty.superGreet();
+// arrow function don't create their own this keyword
