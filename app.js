@@ -11,14 +11,26 @@ class Cat {
   }
 }
 
-let fluffy = new Cat("fluffy");
-console.log(fluffy.dance());
+// sometimes you'll need to say "call this function on this object",
+// that's what call() is for!
+const fluffy = new Cat("fluffy");
 
-console.log(Cat.getRandomCat());
+let fDance = fluffy.dance;
+const newCat = new Cat("gholi");
 
-const fDance = fluffy.dance;
-console.log(fDance());
+console.log(fDance.call(newCat));
+// we can even provide arguments
+console.log(fDance.call(fluffy, "tango"));
 
-// here again we're calling a function on nothing, but
-// when you call a function on nothing and the function comes
-// from inside a class, the value of this will be undefined, not the window.
+const hasan = {
+  name: "hasan",
+  sing: function () {
+    return `${this.name} sings`;
+  },
+};
+const lisa = {
+  name: "lisa",
+};
+
+console.log(hasan.sing());
+console.log(hasan.sing.call(lisa));
