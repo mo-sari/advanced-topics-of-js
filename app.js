@@ -1,22 +1,17 @@
-const person = {
-  name: "ali",
-  hello: function () {
-    return "hello";
-  },
-};
+class Cat {
+  constructor(firstName) {
+    this.firstName = firstName;
+  }
 
-console.log(person.hello());
-const pHello = person.hello;
-console.log(pHello());
+  dance(style = "tango") {
+    return `Meow, I am ${this.firstName} and I like to ${style}`;
+  }
+}
 
-const newPerson = {
-  name: "ali",
-  hello: function () {
-    return `${this.name} says hello`;
-  },
-};
-console.log(newPerson.hello());
-const pNewHello = newPerson.hello;
-console.log(pNewHello());
+let fluffy = new Cat("fluffy");
+console.log(fluffy.dance());
 
-// there is a slight problem here and we'll talk about that in this section
+let fDance = fluffy.dance;
+console.log(fDance());
+
+// in class it throws an error, why ? we'll see.
