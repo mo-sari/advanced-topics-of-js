@@ -1,26 +1,13 @@
-const hasan = {
-  name: "hasan",
-  sing: function () {
-    return `${this.name} sings`;
-  },
-};
-const lisa = {
-  name: "lisa",
-};
+function applyTax(taxRate, price) {
+  return price + price * taxRate;
+}
 
-console.log(hasan.sing());
-console.log(hasan.sing.call(lisa));
+console.log(applyTax(2, 3));
+console.log(applyTax.call(null, 2, 3));
 
-// we can also bind a function to a context, call method gets tedious sometimes
-// like when you want to call it multiple times
+// a common usecase of bind method is to bake in an argument to an already
+// existing function
 
-console.log(hasan.sing.call(lisa));
-console.log(hasan.sing.call(lisa));
-console.log(hasan.sing.call(lisa));
-console.log(hasan.sing.call(lisa));
-console.log(hasan.sing.call(lisa));
-console.log(hasan.sing.call(lisa));
-
-const func = hasan.sing.bind(lisa);
-// NOW we created a new function( sing's functionality but always bind to lisa)
-console.log(func());
+const qomTax = applyTax.bind(null, 2);
+console.log(qomTax(3));
+// bind returns a new copy of the function that is bound to
