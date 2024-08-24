@@ -1,20 +1,20 @@
 function Dog(name, breed) {
   this.name = name;
   this.breed = breed;
-  this.bark = function () {
-    return `${this.name} says woof!`;
-  };
 }
 
 const dog1 = new Dog("dog", "breed");
 const dog2 = new Dog("dog2", "breed2");
 
-console.log(dog1, dog2);
-// THEY both have their own copy of bark method,
-// if you create a thousand of them, you'll have a thousand
-// numbers of bark method.
+Dog.prototype.bark = function () {
+  return `${this.name} says woof!`;
+};
 
-console.log(dog1.bark === dog2.bark);
+console.log(dog1, dog2);
+console.log(dog1.__proto__ === dog2.__proto__);
+
+// for objects created by factory function's we have to manualy add
+// function's to their prototype
 
 class NewDog {
   constructor(name, breed) {
@@ -29,6 +29,12 @@ class NewDog {
 const dog3 = new NewDog("dog", "breed");
 const dog4 = new NewDog("dog2", "breed2");
 
-console.log(dog3, dog4);
-// the bark method is shared through prototypes.
-console.log(dog3.bark === dog4.bark);
+console.log(dog3.__proto__);
+
+console.log(dog3.__proto__ === dog4.__proto__);
+// every object has access to another special object called prototype
+// that is created when we use class keyword.
+
+// remember in both cases the new keyword is
+// linking the objects with their respective prototype's
+// like link's dog1 to Dog's prototype
