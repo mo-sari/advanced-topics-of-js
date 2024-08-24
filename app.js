@@ -1,17 +1,11 @@
-class Cat {
-  constructor(firstName) {
-    this.firstName = firstName;
-  }
-
-  dance(style = "tango") {
-    return `Meow, I am ${this.firstName} and I like to ${style}`;
-  }
+function greet() {
+  return "hello";
 }
 
-let fluffy = new Cat("fluffy");
-console.log(fluffy.dance());
+console.log(greet());
+window.console.log(greet());
 
-let fDance = fluffy.dance;
-console.log(fDance());
-
-// in class it throws an error, why ? we'll see.
+// when you call a function on nothing, you call it on the "global object"
+// in browser JS, that's typically window( the browser window);
+// this is important because the keyword this, dependes on the object
+// the function is called on.
