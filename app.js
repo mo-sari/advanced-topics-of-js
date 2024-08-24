@@ -1,30 +1,24 @@
-function greet() {
-  return `${this} says hello`;
+class Cat {
+  constructor(firstName) {
+    this.firstName = firstName;
+  }
+  static getRandomCat() {
+    console.log(this);
+  }
+
+  dance(style = "tango") {
+    return `Meow, I am ${this.firstName} and I like to ${style}`;
+  }
 }
 
-console.log(greet());
-// calling greet this way is like calling ==> window.greet()
-// the this keywrod's owner is on the left side (window itself)
+let fluffy = new Cat("fluffy");
+console.log(fluffy.dance());
 
-const obj = {
-  name: "ali",
-  greet: greet,
-};
+console.log(Cat.getRandomCat());
 
-console.log(obj.greet());
-// now the owner on the left side is changed.
+const fDance = fluffy.dance;
+console.log(fDance());
 
-const person = {
-  name: "ali",
-  sing: function () {
-    return `${this.name} sings LALALA`;
-  },
-};
-
-// this is why the output of these two lines differ
-console.log(person.sing());
-
-const singsss = person.sing;
-console.log(singsss());
-
-// the second one is called on window like, window.singsss()
+// here again we're calling a function on nothing, but
+// when you call a function on nothing and the function comes
+// from inside a class, the value of this will be undefined, not the window.
