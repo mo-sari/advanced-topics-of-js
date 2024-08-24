@@ -1,16 +1,26 @@
-const ringo = {
-  firstName: "ringo",
-  greet: function (greeting, punctuation) {
-    console.log(`${this.firstName} says ${greeting}${punctuation}`);
+const hasan = {
+  name: "hasan",
+  sing: function () {
+    return `${this.name} sings`;
   },
 };
-
-const george = {
-  firstName: "George",
+const lisa = {
+  name: "lisa",
 };
 
-console.log(ringo.greet("hello", "!!!"));
-console.log(ringo.greet.call(george, "hello", "!!"));
+console.log(hasan.sing());
+console.log(hasan.sing.call(lisa));
 
-console.log(ringo.greet.apply(george, ["hello", "!!!!"]));
-// the difference is just how we pass the arguments
+// we can also bind a function to a context, call method gets tedious sometimes
+// like when you want to call it multiple times
+
+console.log(hasan.sing.call(lisa));
+console.log(hasan.sing.call(lisa));
+console.log(hasan.sing.call(lisa));
+console.log(hasan.sing.call(lisa));
+console.log(hasan.sing.call(lisa));
+console.log(hasan.sing.call(lisa));
+
+const func = hasan.sing.bind(lisa);
+// NOW we created a new function( sing's functionality but always bind to lisa)
+console.log(func());
