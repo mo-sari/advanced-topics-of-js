@@ -1,26 +1,22 @@
-// .then/.catch and async/await do the same thing, just async await are modern
-// but there might be some scenario's where usign .then .catch is better
+// next two patterns are:
+// 1- sequntial calls( we've seen before with async function's or .then.catch)
 
-// like when I want to make multiple requests but I don't care if they run one after another
+// 2- many calls in sequence
+// Promise.all accepts an array of promises and returns a new promise
+// resolved if all promises resolved
+// rejected even if one promise rejected
 
-const results = [];
+const promises = [fetch("url/1"), fetch("url/2"), fetch("url/3")];
 
-fetch("url").then((res) => results.push(res));
-fetch("url").then((res) => results.push(res));
-fetch("url").then((res) => results.push(res));
+// and we can handle them in two ways:
 
-// and the rest of code is running down here
+Promise.all(promises)
+  .then((results) => console.log(results))
+  .catch((err) => {
+    console.log(err);
+  });
 
-// or this way with async functions
-
-async function fetching() {
-  const res = await fetch("url");
-  console.log(res);
+async function func() {
+  const responses = await Promise.all(promises);
+  console.log(responses);
 }
-async function fetching2() {
-  const res = await fetch("url");
-  console.log(res);
-}
-
-fetching();
-fetching2();
