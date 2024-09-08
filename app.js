@@ -1,12 +1,24 @@
 //callback function's:
-// just functions we pass to other function's to call
+// why do we need them ?
+// js is single threaded, if it's stuck for a request answer, it could not do any other thing
 
-const arr = [1, 2, 3, 4, 5, 6, 7];
-const evens = arr.filter((num) => num % 2 === 0);
-console.log(evens);
+// like:
+const response = FetchingLibrary.get("/api");
+console.log(response);
 
-// other example's include passing a callback to eventListener's, async operation's
-function newfun() {
-  console.log("hello");
-}
-setTimeout(newfun, 3000);
+// so the old patterns is to use callbacks to run all the functionality that is related to response, whenever we got it
+
+const response2 = FetchingLibrary.get("/api", (response) => {
+  console.log(response2);
+});
+
+// this is where we encounter the callback hell problem, running each request right after the previous request was answered( we have not included the error handling yet here)
+const response3 = FetchingLibrary.get("/api", (response) => {
+  FetchingLibrary.get("/api", (response) => {
+    FetchingLibrary.get("/api", (response) => {
+      FetchingLibrary.get("/api", (response) => {});
+    });
+  });
+});
+
+// at this point we reach to promises
