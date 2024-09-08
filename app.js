@@ -1,24 +1,18 @@
-//callback function's:
-// why do we need them ?
-// js is single threaded, if it's stuck for a request answer, it could not do any other thing
+// promises:
+// A promise of one-time guarantee of future value or failure.
 
-// like:
-const response = FetchingLibrary.get("/api");
-console.log(response);
+// how to handle the value when promise resolved or rejected
 
-// so the old patterns is to use callbacks to run all the functionality that is related to response, whenever we got it
+// .then or .catch which both accept callbacks
+// .then has access to the promises resolved value
+// .catch has access to the reason of rejection
 
-const response2 = FetchingLibrary.get("/api", (response) => {
-  console.log(response2);
-});
-
-// this is where we encounter the callback hell problem, running each request right after the previous request was answered( we have not included the error handling yet here)
-const response3 = FetchingLibrary.get("/api", (response) => {
-  FetchingLibrary.get("/api", (response) => {
-    FetchingLibrary.get("/api", (response) => {
-      FetchingLibrary.get("/api", (response) => {});
-    });
+fetch("http://google.com")
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((err) => {
+    console.log(err);
   });
-});
 
-// at this point we reach to promises
+// but the callback hell problem still exists
