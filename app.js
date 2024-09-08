@@ -1,7 +1,7 @@
 // .then/.catch and async/await do the same thing, just async await are modern
 // but there might be some scenario's where usign .then .catch is better
 
-// like when I want to make multiple requests but I don't care if they run one after another,
+// like when I want to make multiple requests but I don't care if they run one after another
 
 const results = [];
 
