@@ -1,23 +1,26 @@
-// and this way we can chain multiple request
-async function getData() {
-  const result1 = await fetch("url");
-  console.log(result1);
-  // below is only initiated once the above is done
-  const result2 = await fetch("url");
-  console.log(result2);
+// .then/.catch and async/await do the same thing, just async await are modern
+// but there might be some scenario's where usign .then .catch is better
 
-  const result3 = await fetch("url");
-  console.log(result3);
+// like when I want to make multiple requests but I don't care if they run one after another,
+
+const results = [];
+
+fetch("url").then((res) => results.push(res));
+fetch("url").then((res) => results.push(res));
+fetch("url").then((res) => results.push(res));
+
+// and the rest of code is running down here
+
+// or this way with async functions
+
+async function fetching() {
+  const res = await fetch("url");
+  console.log(res);
+}
+async function fetching2() {
+  const res = await fetch("url");
+  console.log(res);
 }
 
-async function getData() {
-  try {
-    const result1 = await fetch("url");
-    console.log(result1);
-
-    const result2 = await fetch("url");
-    console.log(result2);
-  } catch (err) {
-    console.log(err);
-  }
-}
+fetching();
+fetching2();
