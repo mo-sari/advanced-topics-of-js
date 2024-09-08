@@ -1,20 +1,23 @@
-// async
+// and this way we can chain multiple request
+async function getData() {
+  const result1 = await fetch("url");
+  console.log(result1);
+  // below is only initiated once the above is done
+  const result2 = await fetch("url");
+  console.log(result2);
 
-// we can declare any function as async, they
-// always return a promise
-
-// await
-// inside async function's we can use await, it
-// pauses execution, think of the await keyword like a pause button
+  const result3 = await fetch("url");
+  console.log(result3);
+}
 
 async function getData() {
-  const result = await fetch("url");
-  console.log(result);
-}
-// this will wait for the data back and then log it,
-// but the below function will log the promise that was made
+  try {
+    const result1 = await fetch("url");
+    console.log(result1);
 
-function getData2() {
-  const result = fetch("url");
-  console.log(result);
+    const result2 = await fetch("url");
+    console.log(result2);
+  } catch (err) {
+    console.log(err);
+  }
 }
