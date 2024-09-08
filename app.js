@@ -1,6 +1,6 @@
 // Promise.allSettled()
 
-// get an array of promises and get's resolved only once all those promises are either resolved of rejected, unlike Promise.all doesn't care if all must resolve
+// get an array of promises and get's resolved or rejected as soon as the first promise was resolved or rejected
 
 async function func() {
   const res1 = fetch("url");
@@ -11,13 +11,7 @@ async function func() {
   const res3 = fetch("url");
   const res4 = fetch("url");
 
-  const results = await Promise.allSettled([
-    res1,
-    res2,
-    res3,
-    res4,
-    badResponse,
-  ]);
+  const winner = await Promise.race([res1, res2, res3, res4, badResponse]);
 
-  console.log(results);
+  console.log(winner);
 }
