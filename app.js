@@ -1,18 +1,41 @@
 // promises:
 // A promise of one-time guarantee of future value or failure.
 
-// how to handle the value when promise resolved or rejected
-
-// .then or .catch which both accept callbacks
-// .then has access to the promises resolved value
-// .catch has access to the reason of rejection
-
 fetch("http://google.com")
-  .then((response) => {
-    console.log(response);
+  .then((response1) => {
+    console.log(response1);
+    fetch("http://google.com")
+      .then((response2) => {
+        console.log(response2);
+        fetch("http://google.com")
+          .then((response3) => {
+            console.log(response3);
+          })
+          .catch((err3) => {
+            console.log(err3);
+          });
+      })
+      .catch((err2) => {
+        console.log(err2);
+      });
   })
-  .catch((err) => {
-    console.log(err);
+  .catch((err1) => {
+    console.log(err1);
   });
 
-// but the callback hell problem still exists
+// still have to chain promises together to have async functionality in order.
+
+// this below is the prefered way, returning a promise after the fetch was completed and chain a .then to it
+fetch("http://google.com")
+  .then((response1) => {
+    console.log(response1);
+    return fetch("http://google.com");
+  })
+  .then((res2) => {
+    console.log(res2);
+    return fetch("http://google.com");
+  })
+  .then((res3) => {
+    console.log(res3);
+    return fetch("http://google.com");
+  });
