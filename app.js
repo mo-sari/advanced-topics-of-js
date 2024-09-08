@@ -1,17 +1,49 @@
-// Promise.allSettled()
+// we can build our own Promises,
+// if we wanted to fake an http request which successeds of fails after a moment we could do it like below
 
-// get an array of promises and get's resolved or rejected as soon as the first promise was resolved or rejected
+// function customPromise() {
+//   return new Promise((resolve) => {
+//     resolve("this is the value returned");
+//   });
+// }
+// async function newFunc() {
+//   const res = await customPromise();
+//   console.log(res);
+// }
+// newFunc();
 
-async function func() {
-  const res1 = fetch("url");
-  const res2 = fetch("url");
+// or if we wanted to fake some time taking :
+// function customPromise() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve("this is the value returned");
+//     }, 1000);
+//   });
+// }
+// async function newFunc() {
+//   const res = await customPromise();
+//   console.log(res);
+// }
+// newFunc();
 
-  const badResponse = fetch("badUrl");
-
-  const res3 = fetch("url");
-  const res4 = fetch("url");
-
-  const winner = await Promise.race([res1, res2, res3, res4, badResponse]);
-
-  console.log(winner);
+// resolving or rejecting:
+function customPromise() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() < 0.5) {
+        resolve("this is the value returned");
+      } else {
+        reject("this promise was rejected");
+      }
+    }, 2000);
+  });
 }
+async function newFunc() {
+  const res = await customPromise();
+  console.log(res);
+}
+newFunc();
+// or this way:
+customPromise()
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
