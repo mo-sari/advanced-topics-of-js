@@ -1,22 +1,23 @@
-// next two patterns are:
-// 1- sequntial calls( we've seen before with async function's or .then.catch)
+// Promise.allSettled()
 
-// 2- many calls in sequence
-// Promise.all accepts an array of promises and returns a new promise
-// resolved if all promises resolved
-// rejected even if one promise rejected
-
-const promises = [fetch("url/1"), fetch("url/2"), fetch("url/3")];
-
-// and we can handle them in two ways:
-
-Promise.all(promises)
-  .then((results) => console.log(results))
-  .catch((err) => {
-    console.log(err);
-  });
+// get an array of promises and get's resolved only once all those promises are either resolved of rejected, unlike Promise.all doesn't care if all must resolve
 
 async function func() {
-  const responses = await Promise.all(promises);
-  console.log(responses);
+  const res1 = fetch("url");
+  const res2 = fetch("url");
+
+  const badResponse = fetch("badUrl");
+
+  const res3 = fetch("url");
+  const res4 = fetch("url");
+
+  const results = await Promise.allSettled([
+    res1,
+    res2,
+    res3,
+    res4,
+    badResponse,
+  ]);
+
+  console.log(results);
 }
