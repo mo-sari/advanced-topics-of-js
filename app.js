@@ -1,13 +1,9 @@
-// Nullish Coalescing
+// Numeric seperators
 
-console.log(false || 'anonymous');
-console.log(0 || 'anonymous');
+const bigNumber = 8000000000;
 
-// || sometimes might not be what we need because something like false, 0 or an empty array are still valid data
-// in these scenario's we can use this nullish thing
+const newBigNumber = 8_000_000_000;
 
-console.log(0 ?? 'anonymous');
+console.log(bigNumber === newBigNumber);
 
-// it just returns the right hand side if we get null or undefined
-
-console.log(null ?? 'anonymous');
+// just makes it easy to read
