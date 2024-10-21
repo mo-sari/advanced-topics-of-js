@@ -1,32 +1,13 @@
-// while dealing with the data which we get from databases we might not always get something organized
-// if we're dealing with deeply nested objects we might get an error if some property doest not exist and we
-// ask for it. in these scenario's we would use optional chaining
+// Nullish Coalescing
 
-const person = {
-  name: 'ali',
-  lastName: {
-    formal: 'ansari',
-    informal: 'ghanbari'
-  },
-  address: {
-    coordinates:{
-      long: '12323',
-      latt: '234234',
-    }
-  },
-  greet(){
-    return 'hello';
-  }
-}
+console.log(false || 'anonymous');
+console.log(0 || 'anonymous');
 
-// these two lines do the same thing but the second one is more up to date,
+// || sometimes might not be what we need because something like false, 0 or an empty array are still valid data
+// in these scenario's we can use this nullish thing
 
-const p1_address = person && person.address && person.address.coordinates && person.address.coordinates.long
+console.log(0 ?? 'anonymous');
 
-const p2_address = person?.address?.coordinates?.long;
+// it just returns the right hand side if we get null or undefined
 
-console.log(p1_address, p2_address);
-
-// and this is how to call methods with optional chaining
-
-console.log(person?.greet?.())
+console.log(null ?? 'anonymous');
