@@ -1,20 +1,11 @@
-// js Generators
+// Array.from needs an iterable to convert it into an array, and could get a mapping
+// function as well to manipulate the data the way we want
 
-function* evens(n){
-  while(true){
-    yield n;
-    n+=2;
-  }
-}
-const even = evens()
-console.log(even.next());
+const newArray = Array.from('hello', (e)=> e.toUpperCase());
+console.log(newArray);
 
-function* colorsGen (){
-  yield 'blue';
-  yield 'red';
-  yield 'brown';
-  yield 'yellow';
-}
-
-// this generator in js is useful when you have a big chunck of data and want to use a part
-// of it every time
+// we can use this to create big sequence's as well
+// just need to have an object with a length property
+const numarray = Array.from({length: 100}, (_, i)=> i);
+// in mapping function, the element itself is undefined here
+console.log(numarray);
