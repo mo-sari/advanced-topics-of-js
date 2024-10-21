@@ -1,10 +1,11 @@
-// isNaN only returns false if it's not NaN and the value can not be interpreted as a number
-console.log(isNaN('sfse'));
-console.log(isNaN([]));
-console.log(Number([]));
+// there is a difference between x++ and ++x
+
+let x = 5;
+let y = x++;
+
+console.log(x, y);
 
 
-// Number.isNan will return false if the argument is anything but Nan
-console.log(Number.isNaN('sfse'));
-console.log(Number.isNaN([]));
-console.log(Number.isNaN(0/0));
+x = 5
+y = ++x;
+console.log(x, y);
