@@ -1,19 +1,10 @@
-// Logical or assignment ||=
+// there is also Nullish coalescing assignment = 
 
-const todo = {priority: ''}
+let person = null;
+let newPerson = 'ali';
 
-// these two lines do the exact same thing
 
-todo.priority || (todo.priority = 'something');
-console.log(todo.priority);
+person ??= 'firstPersonsName';
+newPerson ??= 'newPersonsName';
 
-todo.priority ||= 'newsomething';
-console.log(todo.priority);
-// didn't change here because now it's not falsy(it's not an empty string)
-// we would use this operator to update a varaible if it's value is falsy
-// the opposite is to use:
-
-// Logical and assignement &&=
-
-todo.priority &&= 'anotherSomething';
-console.log(todo.priority);
+console.log(person, newPerson);
