@@ -1,11 +1,20 @@
-// Array.from needs an iterable to convert it into an array, and could get a mapping
-// function as well to manipulate the data the way we want
+// var 
 
-const newArray = Array.from('hello', (e)=> e.toUpperCase());
-console.log(newArray);
+var person = 'ali'
+// if you declare a global var variable like this you have access to it everywhere
 
-// we can use this to create big sequence's as well
-// just need to have an object with a length property
-const numarray = Array.from({length: 100}, (_, i)=> i);
-// in mapping function, the element itself is undefined here
-console.log(numarray);
+function newPerson (){
+  var myName = 'mohsen'
+  console.log(myName);
+}
+// the var in this function is only tied to the function's scop
+// this will throw an error:
+// console.log(myName);
+
+
+// a var variable in any code block like an if or for is scoped to global scope(window)
+if(true){
+  var myLastName = 'ansari';
+}
+
+console.log(myLastName);
