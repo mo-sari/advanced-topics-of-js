@@ -1,9 +1,19 @@
-// Numeric seperators
+// Logical or assignment ||=
 
-const bigNumber = 8000000000;
+const todo = {priority: ''}
 
-const newBigNumber = 8_000_000_000;
+// these two lines do the exact same thing
 
-console.log(bigNumber === newBigNumber);
+todo.priority || (todo.priority = 'something');
+console.log(todo.priority);
 
-// just makes it easy to read
+todo.priority ||= 'newsomething';
+console.log(todo.priority);
+// didn't change here because now it's not falsy(it's not an empty string)
+// we would use this operator to update a varaible if it's value is falsy
+// the opposite is to use:
+
+// Logical and assignement &&=
+
+todo.priority &&= 'anotherSomething';
+console.log(todo.priority);
