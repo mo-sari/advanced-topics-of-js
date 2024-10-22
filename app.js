@@ -1,29 +1,36 @@
-// when we declare a variable with let, we define it in global scope
-// and we can reach it using window.<<varName>>, this is not good because we might
-// change something in window object unintentionaly
-// but let and const are also global but are not saved in window object
+// Hoisting
 
-// in a function if we declare a variable, it doesn't matter if we use let, var or const
-// they're all bined to that function's scope
+console.log(name);
+// this line will throw an error, but below will return undefined
+console.log(lastName);
+var lastName = 'ansari';
+// why? becuase what js does when it see's a var declaration is like this:
+// it first brings the var to the top of the scope
 
-// another distinction is that let and const are block scope(if, for ...) but var is not
+var lastName = undefined;
+console.log(lastName);
+lastName = 'ansari';
 
-// The scope chain:
-// 1. In the local scope
-// 2. Any outer functions
-// 3. Global scope
-
-// js is static scope
-let animal = 'Barn';
-
-function printAniaml(){
-  console.log(animal);
+// this is the same if we were doing that inside a function as well
+function hoisting(){
+  console.log(newfirstname);
+  var newfirstname = 'mohsen';
 }
 
-function alsoPrintAnimal(){
-  let animal = 'new owl'
-  printAniaml();
-}
+hoisting();
 
-console.log(alsoPrintAnimal());
-// the scope of printAniaml is determined when we wrote this function, that is why this is happening
+// for let and const however this works differently, we get an error if we
+// use the variable before declaring it, js again does hoist the variable
+// to the top of the scope, but puts it in a TEMPORAL DEAD ZONE that we can't reach it
+// (for simplicity you can think of it like js does not HOIST the let and const variables
+// at all)
+
+// an interesting example:
+function blah(){
+  if(false){
+    var message = 'hello'
+  }
+  console.log(message);
+}
+blah();
+// in this example we don't get an error, why do you think that is ?
