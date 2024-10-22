@@ -1,90 +1,59 @@
-// closure
-// closure is a function inside another function which we have returned and this inner
-// function has access to the outter function's scope and it's varialbles even after
-// the execution of the outter function is finished.
+// Debouncing
 
-function outterfunction(){
-  const variable = 'something';
-  function inner(){
-    console.log(variable);
-  }
-  return inner;
+// Debouncing in JavaScript is a technique used to limit the rate at which a function is executed. It ensures that a function is only called after a certain period of inactivity, meaning it won't be triggered again until a specified delay has passed since the last time the function was invoked.
+
+// debouncing is commonly used in React, especially when handling input events like search fields, or actions that trigger API calls or state updates. It helps improve performance by reducing the number of function calls, such as preventing multiple API requests from being fired on every keystroke in a search bar.
+
+// this is an example of implementing this concept in react.js :
+
+import React, { useState, useEffect, useRef } from 'react';
+
+function SearchComponent() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+  
+  // Create a ref to store the current timeout ID
+  const debounceTimeout = useRef(null);
+
+  const handleSearch = (term) => {
+    console.log('Searching for:', term);
+    // Simulate an API call
+    setResults([`Result 1 for ${term}`, `Result 2 for ${term}`]);
+  };
+
+  const onInputChange = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    // Clear the previous timeout
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    // Set a new timeout
+    debounceTimeout.current = setTimeout(() => {
+      handleSearch(term);
+    }, 300); // 300ms delay
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={onInputChange}
+        placeholder="Search..."
+      />
+      <div>
+        <h3>Results:</h3>
+        <ul>
+          {results.map((result, index) => (
+            <li key={index}>{result}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
 
-const closure = outterfunction();
-console.log(closure());
-
-
-function idGenerator(){
-  let count = 1
-  function innerIdGen(){
-    return count++;
-  }
-  return innerIdGen;
-}
-
-// const idGen = idGenerator()
-// for (let i = 0; i < 10; i++) {
-//   console.log(idGen());  
-// }
-
-// =======================================================
-// this concept could be useful in scenario's wher we want to hide a variable
-// (kind of make them private) and force the user to access to it through function's, like:
-
-// function createCounter(){
-//   let count = 0;
-//   return {
-//     increment: function (){
-//       return count++;
-//     },
-//     decrement: function(){
-//       return count--;
-//     },
-//     getCount: function(){
-//       console.log(count);
-//     }
-//   }
-// }
-
-// const counter = createCounter()
-// for (let i = 0; i < 10; i++) {
-//   if(Math.random() > 0.5){
-//     counter.increment()
-//   }else{
-//     counter.decrement()
-//   }
-//   counter.getCount();
-// }
-
-// =============================================================
-// another usecase is to create factory function's
-
-function createExponentFunction(exponent){
-  function value(val){
-    return val** exponent;
-  }
-  return value;
-}
-
-const squre = createExponentFunction(2);
-const cube = createExponentFunction(3);
-
-for (let index = 1; index < 10; index++) {
-  console.log(squre(index));
-  console.log(cube(index));
-  console.log('========================================')
-}
-
-// or another example:
-function uniuqueIdGen(prefix){
-  let id = 0;
-  return function(){
-    id++;
-    return `${prefix}_${id}`;
-  }
-}
-const idgenerator = uniuqueIdGen('book')
-for (let index = 1; index < 10; index++) {
-  console.log(idgenerator());
-}
+export default SearchComponent;
