@@ -4,41 +4,32 @@
 // ===============================================
 // ===============================================
 // ===============================================
-// Composition:
-// this is mechanism for combiging multiple fucntions to build a more cimplicated one
-// where the result of each function is passed to the next one.
+// Currying
+// A curried function can be called with any numbers of arguments, if you call it with fewer args than it takes, it returns a smaller partial, which you can then call with remaining arguments.
 
-// a simple example:
-function compose(fn1, fn2){
-  return function (val){
-    return fn2(fn1(val));
+function add3(a, b, c){
+  return a + b + c;
+}
+
+function curry(fn){
+  return function curried(...args){
+    if(args.length >= fn.length){
+      return fn.apply(this, args);
+      // or maybe this:
+      // return fn(...args);
+    }else{
+      return function (...args2){
+        return curried.apply(this, args.concat(args2));
+        // or maybe this:
+        // return curried(...args.concat(args2));
+      }
+    }
   }
 }
 
-function repeatTwice(str){
-  return str.repeat(2);
-}
+const curriedAdd = curry(add3);
 
-function upperCase(str){
-  return str.toUpperCase();
-}
+console.log(curriedAdd(10)(1)(1));
 
-const repeatAndUppercase = compose(repeatTwice, upperCase);
-console.log(repeatAndUppercase('lol'));
-
-// if we wanted to make it more flexible:
-
-function flexibleCompose(...fucntions){
-  // return function(val){
-  //   return fucntions.reduceRight((acc, fnc) => fnc(acc), val);
-  // }
-  return function(val){
-    return fucntions.reduceRight((acc, fnc) => {
-      console.log(fnc.name);
-      return fnc(acc);
-    }, val);
-  }
-}
-
-const output = flexibleCompose(repeatTwice, upperCase);
-console.log(output('hello'))
+const curried10 = curriedAdd(10);
+console.log(curried10(2)(3));
