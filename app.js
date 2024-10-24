@@ -1,29 +1,19 @@
-// new section: LocalStorage
-// these below are the basic method's available while working with localstorage
+// new section: SessionStorage
 
-localStorage.setItem('key', 'value');
-localStorage.getItem('key');
-localStorage.removeItem('key');
-// this below is to delete multiple key value pairs
-localStorage.clear()
+// The statement "sessionStorage can store key-value pairs in a web browser for a single session" refers to the following:
 
-// localstorage only stores data as a string, if we need to store any complext data
-// we might want to turn that into json
-localStorage.setItem('nums', JSON.stringify([1, 2, 3, 4]));
-JSON.parse(localStorage.getItem('nums'));
+// Key-Value Pairs: In sessionStorage, data is stored in the form of key-value pairs, similar to a JavaScript object or dictionary. You can set and retrieve values using unique keys. 
+// Single Session: The "single session" part means that the data stored in sessionStorage is available only during the lifetime of the current browser tab or window session. Once the tab or window is closed, all the data stored in sessionStorage is cleared. However, refreshing the page or navigating to other pages within the same tab does not clear the data—it remains available until the session ends.
 
-// NOTHING SENSITIVE SHOULD BE STORED IN LOCALSTORAGE LIKE PASSWORD'S ...
-// what we can store in ls ? stuff like user preferences(dark mode ...), the products
-// which user has reviewd, if they have field any form partially we could store that, shopping card data, caching data, analytics, add trackings ...
+// Temporary Storage: Unlike localStorage, which persists even after the browser is closed and reopened, sessionStorage is temporary and tied to the current session.
 
-// sometimes we open the same page in multiple tabs and we might change the localstorage
-// and we might want to keep all the pages in sync, what happens by default is that 
-// localstorage is the same across all the pages but to make sure dome elements stay in
-// sync with localstorage data we have to do :
+// in the below example we will get a console.log every time we open a new page but not when we refresh the same page.
 
-window.addEventListener('storage',(e)=>{
-  // first make sure the key we're dealing with has changed
-  if(e.key === 'key'){
-    // run the functionality that will update other pages.
+function warnUserOnce(){
+  if(!sessionStorage.getItem('warned')){
+    alert('hey be careful');
   }
-})
+  sessionStorage.setItem('warned', 'true');
+}
+
+warnUserOnce();
