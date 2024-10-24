@@ -5,3 +5,5 @@ Array.from
 x++ vs ++x 
 Debouncing (<<Very useful in react.js>>)
 Throttling (<<Very useful in react.js>>)
+Function composition
+Currying
