@@ -7,13 +7,11 @@
 
 // Temporary Storage: Unlike localStorage, which persists even after the browser is closed and reopened, sessionStorage is temporary and tied to the current session.
 
-// in the below example we will get a console.log every time we open a new page but not when we refresh the same page.
 
-function warnUserOnce(){
-  if(!sessionStorage.getItem('warned')){
-    alert('hey be careful');
-  }
-  sessionStorage.setItem('warned', 'true');
-}
-
-warnUserOnce();
+const form = document.querySelector('#checkoutForm');
+form.addEventListener('input', (e)=>{
+  const {name, value} = e.target;
+  const formData = JSON.parse(sessionStorage.getItem('form')) ?? {};
+  formData[name] = value;
+  sessionStorage.setItem('form', JSON.stringify(formData));
+})
