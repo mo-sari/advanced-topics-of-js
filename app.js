@@ -1,22 +1,19 @@
 // new Section: Intersection Observer
 
-// if we wanted to do something like tracking ad's viewtime:
+// for working with multiple targets:
 
 let addViewTimes = []
 let addVisibleStartTime;
 
 const observer = new IntersectionObserver(entries =>{
     entries.forEach(entry =>{
+        const {target} = entry;
         if(entry.isIntersecting){
-            addVisibleStartTime = Date.now();
-        }
-        else if(addVisibleStartTime){
-            let addVisibilityDuration = Date.now() - addVisibleStartTime
-            addViewTimes.push(addVisibilityDuration);
-            console.log(addViewTimes);
+            console.log(`box number ${target.id} is in the viewport`)
         }
     })
-}, {threshold: 0.5});
+}, {threshold: 0});
 
-const box = document.querySelector('.box');
-observer.observe(box);
+
+const boxes = document.querySelectorAll('.box');
+boxes.forEach(box => observer.observe(box));
